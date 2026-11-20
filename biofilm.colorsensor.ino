@@ -212,33 +212,34 @@ bool readAllChannels() {
 //  TEST SKETCH
 // ============================================================
 void setup() {
-  Microlab.serial.begin(9600);
-  while (!Serial) { ; }
+  MicroLab.serial.begin(9600);
+  delay(2000);                              // give the USB link / monitor time to connect
+  MicroLab.serial.println("Booting...");
 
   if (!as7341Begin()) {
-    Microlab.serial.println("AS7341 not found");
+    MicroLab.serial.println("AS7341 not found");
     while (1) delay(10);
   }
-  Microlab.serial.println("AS7341 ready");
+  MicroLab.serial.println("AS7341 ready");
 }
 
 void loop() {
   if (!readAllChannels()) {
-    Microlab.serial.println("Read failed");
+    MicroLab.serial.println("Read failed");
     delay(1000);
     return;
   }
 
-  Microlab.serial.print("415 "); Microlab.serial.print(channels[0]);
-  Microlab.serial.print(" | 445 "); Microlab.serial.print(channels[1]);
-  Microlab.serial.print(" | 480 "); Microlab.serial.print(channels[2]);
-  Microlab.serial.print(" | 515 "); Microlab.serial.print(channels[3]);
-  Microlab.serial.print(" | 555 "); Microlab.serial.print(channels[6]);
-  Microlab.serial.print(" | 590 "); Microlab.serial.print(channels[7]);
-  Microlab.serial.print(" | 630 "); Microlab.serial.print(channels[8]);
-  Microlab.serial.print(" | 680 "); Microlab.serial.print(channels[9]);
-  Microlab.serial.print(" | Clear "); Microlab.serial.print(channels[10]);
-  Microlab.serial.print(" | NIR "); Microlab.serial.println(channels[11]);
+  MicroLab.serial.print("415 "); MicroLab.serial.print(channels[0]);
+  MicroLab.serial.print(" | 445 "); MicroLab.serial.print(channels[1]);
+  MicroLab.serial.print(" | 480 "); MicroLab.serial.print(channels[2]);
+  MicroLab.serial.print(" | 515 "); MicroLab.serial.print(channels[3]);
+  MicroLab.serial.print(" | 555 "); MicroLab.serial.print(channels[6]);
+  MicroLab.serial.print(" | 590 "); MicroLab.serial.print(channels[7]);
+  MicroLab.serial.print(" | 630 "); MicroLab.serial.print(channels[8]);
+  MicroLab.serial.print(" | 680 "); MicroLab.serial.print(channels[9]);
+  MicroLab.serial.print(" | Clear "); MicroLab.serial.print(channels[10]);
+  MicroLab.serial.print(" | NIR "); MicroLab.serial.println(channels[11]);
 
   delay(1000);
 }
