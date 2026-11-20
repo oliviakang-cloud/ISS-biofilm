@@ -2,6 +2,7 @@
 //  AS7341 over bit-banged I2C
 //  SDA = pin 10, SCL = pin 11
 // ============================================================
+#include <MicroLab.h>
 
 const uint8_t PIN_SDA = 10;
 const uint8_t PIN_SCL = 11;
@@ -211,33 +212,33 @@ bool readAllChannels() {
 //  TEST SKETCH
 // ============================================================
 void setup() {
-  Serial.begin(9600);
+  Microlab.serial.begin(9600);
   while (!Serial) { ; }
 
   if (!as7341Begin()) {
-    Serial.println("AS7341 not found");
+    Microlab.serial.println("AS7341 not found");
     while (1) delay(10);
   }
-  Serial.println("AS7341 ready");
+  Microlab.serial.println("AS7341 ready");
 }
 
 void loop() {
   if (!readAllChannels()) {
-    Serial.println("Read failed");
+    Microlab.serial.println("Read failed");
     delay(1000);
     return;
   }
 
-  Serial.print("415 "); Serial.print(channels[0]);
-  Serial.print(" | 445 "); Serial.print(channels[1]);
-  Serial.print(" | 480 "); Serial.print(channels[2]);
-  Serial.print(" | 515 "); Serial.print(channels[3]);
-  Serial.print(" | 555 "); Serial.print(channels[6]);
-  Serial.print(" | 590 "); Serial.print(channels[7]);
-  Serial.print(" | 630 "); Serial.print(channels[8]);
-  Serial.print(" | 680 "); Serial.print(channels[9]);
-  Serial.print(" | Clear "); Serial.print(channels[10]);
-  Serial.print(" | NIR "); Serial.println(channels[11]);
+  Microlab.serial.print("415 "); Microlab.serial.print(channels[0]);
+  Microlab.serial.print(" | 445 "); Microlab.serial.print(channels[1]);
+  Microlab.serial.print(" | 480 "); Microlab.serial.print(channels[2]);
+  Microlab.serial.print(" | 515 "); Microlab.serial.print(channels[3]);
+  Microlab.serial.print(" | 555 "); Microlab.serial.print(channels[6]);
+  Microlab.serial.print(" | 590 "); Microlab.serial.print(channels[7]);
+  Microlab.serial.print(" | 630 "); Microlab.serial.print(channels[8]);
+  Microlab.serial.print(" | 680 "); Microlab.serial.print(channels[9]);
+  Microlab.serial.print(" | Clear "); Microlab.serial.print(channels[10]);
+  Microlab.serial.print(" | NIR "); Microlab.serial.println(channels[11]);
 
   delay(1000);
 }
